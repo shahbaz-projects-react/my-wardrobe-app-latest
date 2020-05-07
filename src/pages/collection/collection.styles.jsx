@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const CollectionPageContainer = styled.div`
   display: flex;
@@ -12,10 +12,18 @@ export const CollectionTitle = styled.h2`
 
 export const CollectionItemsContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 10px;
-
-  & > div {
-    margin-bottom: 30px;
-  }
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+  grid-gap: 0.5rem;
+  font-family: Avenir, Roboto, Helvetica, san-serif;
+  font-size: 80%;
 `;
+
+// export const CollectionItemsContainer = styled.div`
+//   display: grid;
+//   grid-template-columns: 1fr 1fr 1fr 1fr;
+//   grid-gap: 10px;
+
+//   & > div {
+//     margin-bottom: 30px;
+//   }
+// `;

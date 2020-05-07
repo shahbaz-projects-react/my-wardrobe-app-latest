@@ -1,5 +1,12 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  font-family: 'Open Sans Condensed';
+  font-family: "Open Sans Condensed";
   padding: 20px 40px;
 }
 
@@ -10,4 +17,7 @@ a {
 
 * {
   box-sizing: border-box;
+}
+.logo {
+  height: 100%;
 }

@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import CustomButton from '../custom-button/custom-button.component';
+import styled from "styled-components";
+import CustomButton from "../custom-button/custom-button.component";
 
 export const CollectionItemContainer = styled.div`
-  width: 22vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   height: 350px;
@@ -54,4 +54,5 @@ export const NameContainer = styled.span`
 export const PriceContainer = styled.span`
   width: 10%;
   text-align: right;
+  margin-right: 0.2rem;
 `;
