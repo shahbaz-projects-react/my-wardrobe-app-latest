@@ -4,7 +4,7 @@ export const FooterContainer = styled.div`
   height: 10rem;
   margin-top: 4rem;
   background-color: #bababa;
-  padding: 2rem;
+  padding: 1rem;
   opacity: 0.85;
   display: grid;
   grid-template-columns: 1fr 1fr;
