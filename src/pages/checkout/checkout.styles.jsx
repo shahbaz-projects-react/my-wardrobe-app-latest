@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const CheckoutPageContainer = styled.div`
   width: 55%;
@@ -11,6 +11,9 @@ export const CheckoutPageContainer = styled.div`
   button {
     margin-left: auto;
     margin-top: 50px;
+  }
+  @media (max-width: 500px) {
+    width: 100%;
   }
 `;
 

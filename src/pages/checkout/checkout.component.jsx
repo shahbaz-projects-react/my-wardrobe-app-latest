@@ -1,25 +1,27 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
-import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
-import CheckoutItem from '../../components/checkout-item/checkout-item.component';
+import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
+import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import TitleUpdater from "../../components/dynamic-title/dynamic-title.component";
 
 import {
   selectCartItems,
-  selectCartTotal
-} from '../../redux/cart/cart.selectors';
+  selectCartTotal,
+} from "../../redux/cart/cart.selectors";
 
 import {
   CheckoutPageContainer,
   CheckoutHeaderContainer,
   HeaderBlockContainer,
   TotalContainer,
-  WarningContainer
-} from './checkout.styles';
+  WarningContainer,
+} from "./checkout.styles";
 
 const CheckoutPage = ({ cartItems, total }) => (
   <CheckoutPageContainer>
+    <TitleUpdater title="Checkout" />
     <CheckoutHeaderContainer>
       <HeaderBlockContainer>
         <span>Product</span>
@@ -37,7 +39,7 @@ const CheckoutPage = ({ cartItems, total }) => (
         <span>Remove</span>
       </HeaderBlockContainer>
     </CheckoutHeaderContainer>
-    {cartItems.map(cartItem => (
+    {cartItems.map((cartItem) => (
       <CheckoutItem key={cartItem.id} cartItem={cartItem} />
     ))}
     <TotalContainer>TOTAL: ${total}</TotalContainer>
@@ -52,7 +54,7 @@ const CheckoutPage = ({ cartItems, total }) => (
 
 const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
-  total: selectCartTotal
+  total: selectCartTotal,
 });
 
 export default connect(mapStateToProps)(CheckoutPage);
