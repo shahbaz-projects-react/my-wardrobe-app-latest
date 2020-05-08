@@ -12,6 +12,7 @@
     "react-google-login": "^5.1.12",
     "react-helmet": "^6.0.0",
     "react-redux": "7.0.3",
+    "react-scripts": "3.4.0",
     "react-router-dom": "5.0.0",
     "react-stripe-checkout": "2.6.3",
     "redux": "4.0.1",
@@ -19,9 +20,6 @@
     "redux-persist": "5.10.0",
     "reselect": "4.0.0",
     "styled-components": "4.2.0"
-  },
-  "devDependencies": {
-    "react-scripts": "3.0.0"
   },
   "resolutions": {
     "babel-jest": "24.7.1"
