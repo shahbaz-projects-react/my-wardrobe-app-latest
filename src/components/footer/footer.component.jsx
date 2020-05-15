@@ -8,7 +8,7 @@ const Footer = () => {
     <FooterContainer>
       <span style={{ justifySelf: "center", alignSelf: "end" }}>
         <Copy style={{ margin: "0 0.2rem" }} />
-        2020 My-Warbrobe by CRWN
+        {new Date().getFullYear()}, My-Warbrobe by CRWN
       </span>
       <span style={{ justifySelf: "center", alignSelf: "end" }}>
         Created by Shahbaz Gul Khan. Connect
