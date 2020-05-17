@@ -7,32 +7,33 @@ import "./App.css";
 
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
-import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+
 import CheckoutPage from "./pages/checkout/checkout.component";
 
 import Header from "./components/header/header.component";
 import Footer from "./components/footer/footer.component";
 
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-
 import { setCurrentUser } from "./redux/user/user.actions";
-import { selectCurrentUser } from "./redux/user/user.selectors";
 import setAuthToken from "./utils/setAuthToken";
 import { logoutUser } from "./redux/user/user.actions";
 import store from "./redux/store";
 import jwt_decode from "jwt-decode";
+import Login from "./components/auth/login";
+import Register from "./components/auth/register";
 
 // Check for token to keep user logged in
-if (localStorage.jwtToken) {
+if (localStorage.jwtToken_wardrobe) {
   // Set auth token header auth
-  const token = localStorage.jwtToken;
-  console.log("token", token);
-
+  const token = localStorage.jwtToken_wardrobe;
   setAuthToken(token);
   // Decode token and get user info and exp
   const decoded = jwt_decode(token);
   // Set user and isAuthenticated
-  store.dispatch(setCurrentUser(decoded));
+  store
+    .dispatch(setCurrentUser(decoded))
+    .then(() =>
+      console.log("received").catch((err) => ("The error is :", err))
+    );
   // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
@@ -44,31 +45,6 @@ if (localStorage.jwtToken) {
 }
 
 class App extends React.Component {
-  // unsubscribeFromAuth = null;
-
-  // componentDidMount() {
-  //   const { setCurrentUser } = this.props;
-
-  //   this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-  //     if (userAuth) {
-  //       const userRef = await createUserProfileDocument(userAuth);
-
-  //       userRef.onSnapshot((snapShot) => {
-  //         setCurrentUser({
-  //           id: snapShot.id,
-  //           ...snapShot.data(),
-  //         });
-  //       });
-  //     }
-
-  //     setCurrentUser(userAuth);
-  //   });
-  // }
-
-  // componentWillUnmount() {
-  //   this.unsubscribeFromAuth();
-  // }
-
   render() {
     return (
       <div>
@@ -77,17 +53,8 @@ class App extends React.Component {
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
           <Route exact path="/checkout" component={CheckoutPage} />
-          <Route
-            exact
-            path="/login"
-            render={() =>
-              this.props.currentUser ? (
-                <Redirect to="/" />
-              ) : (
-                <SignInAndSignUpPage />
-              )
-            }
-          />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
         </Switch>
         <Footer />
       </div>
@@ -95,12 +62,4 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

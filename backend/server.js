@@ -5,8 +5,7 @@ const keys = require("./config/keys");
 const passport = require("passport");
 
 const uri = keys.mongoURI;
-//process.env.MONGO_DB_ATLAS_URI;
-mongoose.connect(uri, {
+mongoose.connect(`${uri}`, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,

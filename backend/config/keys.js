@@ -1,5 +1,5 @@
+const dotenv = require("dotenv").config();
 module.exports = {
-  mongoURI:
-    "mongodb+srv://admin:admin@cluster1-8ql9k.mongodb.net/wardrobe_db?retryWrites=true&w=majority",
+  mongoURI: `${process.env.REACT_APP_MONGO_URI}`,
   secretOrKey: "secret",
 };
