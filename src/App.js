@@ -17,32 +17,57 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
+import setAuthToken from "./utils/setAuthToken";
+import { logoutUser } from "./redux/user/user.actions";
+import store from "./redux/store";
+import jwt_decode from "jwt-decode";
+
+// Check for token to keep user logged in
+if (localStorage.jwtToken) {
+  // Set auth token header auth
+  const token = localStorage.jwtToken;
+  console.log("token", token);
+
+  setAuthToken(token);
+  // Decode token and get user info and exp
+  const decoded = jwt_decode(token);
+  // Set user and isAuthenticated
+  store.dispatch(setCurrentUser(decoded));
+  // Check for expired token
+  const currentTime = Date.now() / 1000; // to get in milliseconds
+  if (decoded.exp < currentTime) {
+    // Logout user
+    store.dispatch(logoutUser());
+    // Redirect to login
+    window.location.href = "./login";
+  }
+}
 
 class App extends React.Component {
-  unsubscribeFromAuth = null;
+  // unsubscribeFromAuth = null;
 
-  componentDidMount() {
-    const { setCurrentUser } = this.props;
+  // componentDidMount() {
+  //   const { setCurrentUser } = this.props;
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+  //   this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+  //     if (userAuth) {
+  //       const userRef = await createUserProfileDocument(userAuth);
 
-        userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data(),
-          });
-        });
-      }
+  //       userRef.onSnapshot((snapShot) => {
+  //         setCurrentUser({
+  //           id: snapShot.id,
+  //           ...snapShot.data(),
+  //         });
+  //       });
+  //     }
 
-      setCurrentUser(userAuth);
-    });
-  }
+  //     setCurrentUser(userAuth);
+  //   });
+  // }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+  // componentWillUnmount() {
+  //   this.unsubscribeFromAuth();
+  // }
 
   render() {
     return (
@@ -54,7 +79,7 @@ class App extends React.Component {
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route
             exact
-            path="/signin"
+            path="/login"
             render={() =>
               this.props.currentUser ? (
                 <Redirect to="/" />
