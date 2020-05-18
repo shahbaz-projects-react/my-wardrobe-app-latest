@@ -3,7 +3,6 @@ import React from "react";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
-import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 
 import {
   SignInContainer,
@@ -27,12 +26,7 @@ class SignIn extends React.Component {
     const { email, password } = this.state;
     // console.log("state", this.state);
 
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: "", password: "" });
-    } catch (error) {
-      console.log(error);
-    }
+    
   };
 
   handleChange = (event) => {
@@ -66,9 +60,7 @@ class SignIn extends React.Component {
           />
           <ButtonsBarContainer>
             <CustomButton type="submit"> Sign in </CustomButton>
-            <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
-              Sign up with Google
-            </CustomButton>
+            
           </ButtonsBarContainer>
         </form>
       </SignInContainer>
