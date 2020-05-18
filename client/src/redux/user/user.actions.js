@@ -22,6 +22,7 @@ export const loginUser = (userData) => (dispatch) => {
     .then((res) => {
       // Set token to localStorage
       const { token } = res.data;
+
       localStorage.setItem("jwtToken_wardrobe", token);
       // Set token to Auth header
       setAuthToken(token);
@@ -38,7 +39,16 @@ export const loginUser = (userData) => (dispatch) => {
     );
 };
 
+export const setPreviousUser = (decoded) => {
+  return (dispatch) => {
+    console.log("here", decoded);
+
+    dispatch(setCurrentUser(decoded));
+  };
+};
+
 export const setCurrentUser = (decoded) => {
+  console.log("setting here", decoded);
   return {
     type: UserActionTypes.SET_CURRENT_USER,
     payload: decoded,
