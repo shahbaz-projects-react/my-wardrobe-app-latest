@@ -6,7 +6,7 @@ import { UserActionTypes } from "./user.types";
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
   axios
-    .post("/users/register", userData)
+    .post(`${process.env.REACT_APP_CONNECT_URI}/users/register`, userData)
     .then((res) => history.push("/login")) // re-direct to login on successful register
     .catch((err) =>
       dispatch({
@@ -18,7 +18,7 @@ export const registerUser = (userData, history) => (dispatch) => {
 // Login - get user token
 export const loginUser = (userData) => (dispatch) => {
   axios
-    .post("/users/login", userData)
+    .post(`${process.env.REACT_APP_CONNECT_URI}/users/login`, userData)
     .then((res) => {
       // Set token to localStorage
       const { token } = res.data;
@@ -41,14 +41,11 @@ export const loginUser = (userData) => (dispatch) => {
 
 export const setPreviousUser = (decoded) => {
   return (dispatch) => {
-    console.log("here", decoded);
-
     dispatch(setCurrentUser(decoded));
   };
 };
 
 export const setCurrentUser = (decoded) => {
-  console.log("setting here", decoded);
   return {
     type: UserActionTypes.SET_CURRENT_USER,
     payload: decoded,
