@@ -1,6 +1,6 @@
 # The Clothing App
 
-It's a React App created with a Redux flow, and focuses on the basic functionalities of Routing, adding/removing items from cart using Redux. As of styling, HTML5 and CSS3 has been used to support the CSS Grid mixed with Flex.
+It's now a MERN App created with a Redux flow, and focuses on the basic functionalities of Routing, adding/removing items from cart using Redux. As of styling, HTML5 and CSS3 has been used to support the CSS Grid mixed with Flex.
 
 ## Highlighted features
 
@@ -13,6 +13,7 @@ APP
     - Responsive web app
     - Basic Search Engine Optimization
     - Dynamic Title
+    - Login and Register
 ```
 
 ## Authors
@@ -21,3 +22,4 @@ APP
   Connect with me \*\* [LinkedInProfile](https://www.linkedin.com/in/shahbaz-gul-khan-4a337798/)
 
 You can find an hosted e-commerce website [Clothing-app](https://my-wardrobe-latest.herokuapp.com/)
+Also checkout the [Covid-Data App](https://covid-data-update.herokuapp.com/)
