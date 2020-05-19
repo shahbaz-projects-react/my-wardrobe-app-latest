@@ -31,7 +31,7 @@ const Header = ({ isAuthenticated, hidden, logoutUser }) => {
       </LogoContainer>
       <OptionsContainer>
         <OptionLink to="/shop">SHOP</OptionLink>
-        <OptionLink to="/shop">CONTACT</OptionLink>
+        <OptionLink to="/contact">CONTACT</OptionLink>
         {isAuthenticated ? (
           <OptionLink as="div" onClick={onLogoutClick}>
             SIGN OUT
@@ -39,7 +39,7 @@ const Header = ({ isAuthenticated, hidden, logoutUser }) => {
         ) : (
           <OptionLink to="/login">SIGN IN</OptionLink>
         )}
-        {!isAuthenticated && <OptionLink to="/register">Register</OptionLink>}
+        {!isAuthenticated && <OptionLink to="/register">REGISTER</OptionLink>}
         <CartIcon />
       </OptionsContainer>
       {hidden ? null : <CartDropdown />}

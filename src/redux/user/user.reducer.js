@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   isAuthenticated: false,
   currentUser: {},
   loading: false,
+  previousPath: "/",
 };
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {

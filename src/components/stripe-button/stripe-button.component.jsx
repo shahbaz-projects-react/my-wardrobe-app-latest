@@ -1,7 +1,11 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectAuth } from "../../redux/user/user.selectors";
+import PropTypes from "prop-types";
 
-const StripeCheckoutButton = ({ price }) => {
+const StripeCheckoutButton = ({ price, isAuthenticated }) => {
   const priceForStripe = price * 100;
   const publishableKey = "pk_test_WBqax2FWVzS9QlpJScO07iuL";
 
@@ -22,8 +26,17 @@ const StripeCheckoutButton = ({ price }) => {
       panelLabel="Pay Now"
       token={onToken}
       stripeKey={publishableKey}
+      disabled={!isAuthenticated}
     />
   );
 };
 
-export default StripeCheckoutButton;
+StripeCheckoutButton.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  isAuthenticated: selectAuth,
+});
+
+export default connect(mapStateToProps)(StripeCheckoutButton);

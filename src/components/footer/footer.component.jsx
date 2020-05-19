@@ -11,12 +11,13 @@ const Footer = () => {
         {new Date().getFullYear()}, My-Warbrobe by CRWN
       </span>
       <span style={{ justifySelf: "center", alignSelf: "end" }}>
-        Created by Shahbaz Gul Khan. Connect
+        Created by Shahbaz Gul Khan.
         <a
           href={process.env.REACT_APP_LINKEDIN_PROFILE}
           target="_blank"
           rel="noreferrer noopener"
         >
+          {"  "}Connect
           <LinkedIn
             style={{ margin: "0 0.2rem", width: "1rem", height: "1rem" }}
           />
