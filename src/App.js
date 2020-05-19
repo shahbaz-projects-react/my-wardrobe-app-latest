@@ -18,6 +18,7 @@ import Login from "./components/auth/login";
 import Register from "./components/auth/register";
 import { setPreviousUser } from "./redux/user/user.actions";
 import { connect } from "react-redux";
+import Contact from "./components/contact/contact.component";
 
 class App extends React.Component {
   componentDidMount() {
@@ -40,6 +41,7 @@ class App extends React.Component {
     }
   }
   render() {
+    console.log(this.props);
     return (
       <div>
         <Header />
@@ -47,6 +49,7 @@ class App extends React.Component {
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
           <Route exact path="/checkout" component={CheckoutPage} />
+          <Route exact path="/contact" component={Contact} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
         </Switch>
