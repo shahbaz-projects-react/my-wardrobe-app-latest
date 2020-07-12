@@ -1,62 +1,64 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { loginUser } from "../../redux/user/user.actions.js";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { loginUser } from '../../redux/user/user.actions.js'
 import {
   SignInContainer,
   SignInTitle,
   ButtonsBarContainer,
   ErrorSpace,
   FormContainer,
-} from "./form.styles";
-import FormInput from "../form-input/form-input.component";
-import CustomButton from "../custom-button/custom-button.component";
+} from './form.styles'
+import FormInput from '../form-input/form-input.component'
+import CustomButton from '../custom-button/custom-button.component'
+import TitleUpdater from '../dynamic-title/dynamic-title.component'
 
 class Login extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       errors: {},
-    };
+    }
   }
 
   componentDidMount() {
     if (this.props.user.isAuthenticated) {
-      this.props.history.push("/");
+      this.props.history.push('/')
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.user.isAuthenticated) {
-      this.props.history.push("/"); // push user to dashboard when they login
+      this.props.history.push('/') // push user to dashboard when they login
     }
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors,
-      });
+      })
     }
   }
 
   onChange = (e) => {
-    this.setState({ [e.target.id]: e.target.value });
-  };
+    this.setState({ [e.target.id]: e.target.value })
+  }
 
   onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     const userData = {
       email: this.state.email,
       password: this.state.password,
-    };
-    this.props.loginUser(userData);
-  };
+    }
+    this.props.loginUser(userData)
+  }
 
   render() {
-    const { errors } = this.state;
+    const { errors } = this.state
 
     return (
       <SignInContainer>
+        <TitleUpdater title="SignIn" />
         <FormContainer>
           <SignInTitle>Already have an account?</SignInTitle>
           <span>Sign in with your email and password</span>
@@ -65,7 +67,7 @@ class Login extends Component {
               errors.emailnotfound ||
               errors.password ||
               errors.passwordincorrect) &&
-              "Email or Password is incorrect"}
+              'Email or Password is incorrect'}
           </ErrorSpace>
           <form noValidate onSubmit={this.onSubmit}>
             <FormInput
@@ -93,16 +95,16 @@ class Login extends Component {
           </form>
         </FormContainer>
       </SignInContainer>
-    );
+    )
   }
 }
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-};
+}
 const mapStateToProps = (state) => ({
   user: state.user,
   errors: state.errors,
-});
-export default connect(mapStateToProps, { loginUser })(Login);
+})
+export default connect(mapStateToProps, { loginUser })(Login)

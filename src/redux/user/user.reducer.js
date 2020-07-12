@@ -10,7 +10,6 @@ const INITIAL_STATE = {
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case UserActionTypes.SET_CURRENT_USER:
-      console.log("payload", action.payload);
       return {
         ...state,
         isAuthenticated: !isEmpty(action.payload),

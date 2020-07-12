@@ -1,33 +1,34 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { registerUser } from "../../redux/user/user.actions";
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { registerUser } from '../../redux/user/user.actions'
 import {
   SignInContainer,
   SignInTitle,
   ButtonsBarContainer,
   ErrorSpan,
   FormContainer,
-} from "./form.styles";
-import FormInput from "../form-input/form-input.component";
-import CustomButton from "../custom-button/custom-button.component";
+} from './form.styles'
+import FormInput from '../form-input/form-input.component'
+import CustomButton from '../custom-button/custom-button.component'
+import TitleUpdater from '../dynamic-title/dynamic-title.component'
 
 class Register extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
-      name: "",
-      email: "",
-      password: "",
-      password2: "",
+      name: '',
+      email: '',
+      password: '',
+      password2: '',
       errors: {},
-    };
+    }
   }
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/");
+      this.props.history.push('/')
     }
   }
 
@@ -35,31 +36,32 @@ class Register extends Component {
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors,
-      });
+      })
     }
   }
 
   onChange = (e) => {
-    this.setState({ [e.target.id]: e.target.value });
-  };
+    this.setState({ [e.target.id]: e.target.value })
+  }
   onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     const newUser = {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2,
-    };
-    console.log(newUser);
-    this.props.registerUser(newUser, this.props.history);
-  };
+    }
+    console.log(newUser)
+    this.props.registerUser(newUser, this.props.history)
+  }
   render() {
-    const { errors } = this.state;
+    const { errors } = this.state
     return (
       <SignInContainer>
+        <TitleUpdater title="Register" />
         <FormContainer>
           <SignInTitle>Register below</SignInTitle>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
             <ErrorSpan>{errors.name}</ErrorSpan>
             <ErrorSpan>{errors.email}</ErrorSpan>
             <ErrorSpan>{errors.password}</ErrorSpan>
@@ -112,19 +114,19 @@ class Register extends Component {
           </form>
         </FormContainer>
       </SignInContainer>
-    );
+    )
   }
 }
 
 const mapStateToProps = (state) => ({
   auth: state.user,
   errors: state.errors,
-});
+})
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-};
+}
 
-export default connect(mapStateToProps, { registerUser })(withRouter(Register));
+export default connect(mapStateToProps, { registerUser })(withRouter(Register))

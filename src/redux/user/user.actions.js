@@ -20,6 +20,8 @@ export const loginUser = (userData) => (dispatch) => {
   axios
     .post(`${process.env.REACT_APP_CONNECT_URI}/users/login`, userData)
     .then((res) => {
+      console.log("User Res", res);
+
       // Set token to localStorage
       const { token } = res.data;
 

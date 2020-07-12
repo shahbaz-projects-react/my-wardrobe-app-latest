@@ -7,10 +7,10 @@ import { HomePageContainer } from "./homepage.styles";
 
 class HomePage extends React.Component {
   componentDidMount() {
-    console.log(this.props);
+    
   }
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.props);
+    
   }
   render() {
     return (
